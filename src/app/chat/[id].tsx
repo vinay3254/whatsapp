@@ -14,6 +14,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useMessages } from '@/hooks/use-messages';
 import { useAuth } from '@/providers/auth-provider';
 import { Palette } from '@/constants/theme';
+import { EmojiPicker } from '@/components/emoji-picker';
 import type { OptimisticMessage } from '@/hooks/use-messages';
 
 export default function ConversationScreen() {
@@ -21,6 +22,7 @@ export default function ConversationScreen() {
   const { session } = useAuth();
   const { messages, loading, error, sendText, retry } = useMessages(id);
   const [input, setInput] = useState('');
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
   const handleSend = async () => {
     const text = input;
@@ -61,6 +63,9 @@ export default function ConversationScreen() {
 
       {!loading && (
         <View style={styles.inputBar}>
+          <TouchableOpacity style={styles.emojiBtn} onPress={() => setShowEmojiPicker((v) => !v)}>
+            <Ionicons name={showEmojiPicker ? 'happy' : 'happy-outline'} size={22} color={Palette.outline} />
+          </TouchableOpacity>
           <TextInput
             style={styles.input}
             placeholder="Type a message..."
@@ -78,6 +83,11 @@ export default function ConversationScreen() {
           </TouchableOpacity>
         </View>
       )}
+      <EmojiPicker
+        visible={showEmojiPicker}
+        onClose={() => setShowEmojiPicker(false)}
+        onSelect={(emoji) => setInput((prev) => prev + emoji)}
+      />
     </KeyboardAvoidingView>
   );
 }
@@ -119,4 +129,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   sendBtnDisabled: { opacity: 0.5 },
+  emojiBtn: {
+    width: 36,
+    height: 36,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
