@@ -2,6 +2,14 @@
   command = "npx expo export --platform web"
   publish = "dist"
 
+[build.environment]
+  # Safe to commit: these are the Supabase *public* project URL and *anon* key,
+  # protected server-side by Row Level Security, not secrets. Hardcoded here
+  # because Netlify's dashboard/API env vars were not reliably reaching this
+  # build step (same output bundle across two redeploys after setting them).
+  EXPO_PUBLIC_SUPABASE_URL = "https://cpcnljwmbvkdxadyrubu.supabase.co"
+  EXPO_PUBLIC_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNwY25sandtYnZrZHhhZHlydWJ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMzNDQxNTYsImV4cCI6MjA5ODkyMDE1Nn0.G7qiktBUmELtkEWqcopvHQeJpT7jNR8R2Ac9bTDGyxQ"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
