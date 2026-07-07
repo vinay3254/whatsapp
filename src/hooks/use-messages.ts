@@ -83,6 +83,9 @@ export function useMessages(conversationId: string) {
         conversation_id: conversationId,
         sender_id: session.user.id,
         text: text.trim(),
+        media_url: null,
+        media_type: null,
+        media_size_bytes: null,
         created_at: new Date().toISOString(),
         read_at: null,
         status: 'pending',
@@ -96,7 +99,7 @@ export function useMessages(conversationId: string) {
   const retry = useCallback(
     async (localId: string) => {
       const target = messages.find((m) => m.id === localId);
-      if (!target || target.status !== 'failed') return;
+      if (!target || target.status !== 'failed' || target.text === null) return;
 
       setMessages((prev) => prev.map((m) => (m.id === localId ? { ...m, status: 'pending' } : m)));
       await insertAndResolve(localId, target.text);

@@ -7,6 +7,7 @@ export interface Profile {
   read_receipts_enabled: boolean;
   last_seen_visibility: 'everyone' | 'contacts' | 'nobody';
   profile_photo_visibility: 'everyone' | 'contacts' | 'nobody';
+  notifications_enabled: boolean;
   created_at: string;
 }
 
@@ -29,7 +30,10 @@ export interface Message {
   id: string;
   conversation_id: string;
   sender_id: string;
-  text: string;
+  text: string | null;
+  media_url: string | null;
+  media_type: 'image' | 'video' | null;
+  media_size_bytes: number | null;
   created_at: string;
   read_at: string | null;
 }
