@@ -7,12 +7,12 @@ import { Palette } from '@/constants/theme';
 
 const NAV_ROWS: { key: string; label: string; icon: keyof typeof Feather.glyphMap; onPress?: () => void }[] = [
   { key: 'add-contact', label: 'Add contact', icon: 'user-plus', onPress: () => router.push('/contacts/add') },
-  { key: 'account', label: 'Account', icon: 'user' },
+  { key: 'account', label: 'Account', icon: 'user', onPress: () => router.push('/settings/account') },
   { key: 'privacy', label: 'Privacy', icon: 'lock', onPress: () => router.push('/settings/privacy') },
-  { key: 'notifications', label: 'Notifications', icon: 'bell' },
-  { key: 'storage', label: 'Storage & Data', icon: 'database' },
+  { key: 'notifications', label: 'Notifications', icon: 'bell', onPress: () => router.push('/settings/notifications') },
+  { key: 'storage', label: 'Storage & Data', icon: 'database', onPress: () => router.push('/settings/storage') },
   { key: 'appearance', label: 'Appearance', icon: 'aperture' },
-  { key: 'help', label: 'Help', icon: 'help-circle' },
+  { key: 'help', label: 'Help', icon: 'help-circle', onPress: () => router.push('/settings/help') },
 ];
 
 export default function SettingsScreen() {
