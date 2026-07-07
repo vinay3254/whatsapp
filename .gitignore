@@ -44,3 +44,6 @@ example
 
 # Supabase local env
 .env
+
+# Netlify CLI local state
+.netlify/
